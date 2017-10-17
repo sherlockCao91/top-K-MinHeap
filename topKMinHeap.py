@@ -12,14 +12,6 @@
 #     if rchild is not None:
 #         printTree(rchild)
 
-def main(testList,maxSize = 10):
-    # print testList[0]
-    test = miniHeap(maxSize)
-    for testV in testList:
-        test.dataInsert(testV)
-    # print test.tree
-    # printTree(test.root)
-
 class miniHeap():
     tree = []
     def __init__(self,maxSize = 10):
@@ -96,7 +88,30 @@ class miniHeap():
             self.dataUp(self.crtSize-1)
         print self.tree
 
+    def sort(self):
+        rstList = []
+        # target = self.tree
+        # targetSize = self.crtSize
+        while self.crtSize>1:
+            rstList.append(self.tree[0])
+            self.tree[0]=self.tree[self.crtSize-1]
+            self.crtSize=self.crtSize-1
+            self.dataDown(0)
+        if self.crtSize == 1:
+            rstList.append(self.tree[0])
+            self.crtSize=self.crtSize-1
+        return rstList
+
+def main(testList,maxSize = 10):
+    # print testList[0]
+    test = miniHeap(maxSize)
+    for testV in testList:
+        test.dataInsert(testV)
+    print test.sort()
+    # print test.tree
+    # printTree(test.root)
+
 if __name__ == '__main__':
     testList =[9,8,7,15,5,6,4,3,2,1,10,11,12]
-    maxSize = 6
+    maxSize = 10
     main(testList,maxSize)
